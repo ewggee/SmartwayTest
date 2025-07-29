@@ -7,7 +7,7 @@ public static class ApplicationExtensions
 {
     public static IServiceCollection AddServices(this IServiceCollection services)
     {
-        services.AddScoped<EmployeeService>();
+        services.AddScoped<IEmployeeService, EmployeeService>();
 
         return services;
     }

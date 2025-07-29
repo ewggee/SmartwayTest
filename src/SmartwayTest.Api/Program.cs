@@ -1,3 +1,4 @@
+using SmartwayTest.Api.Filters;
 using SmartwayTest.Application.Extensions;
 using SmartwayTest.DataAccess.Extensions;
 
@@ -16,7 +17,10 @@ public class Program
             .AddFluentMigrator(builder.Configuration)
             .MigrateUp();
 
-        builder.Services.AddControllers();
+        builder.Services.AddControllers(options =>
+        {
+            options.Filters.Add<ApiExceptionFilter>();
+        });
 
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
