@@ -3,9 +3,58 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35013.160
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{19FEEF71-A972-473C-8242-7BC67CB82EED}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmartwayTest.Application", "src\SmartwayTest.Application\SmartwayTest.Application.csproj", "{ABA7C0D1-E8D0-4211-8F89-16D50ED5B5FE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmartwayTest.Contracts", "src\SmartwayTest.Contracts\SmartwayTest.Contracts.csproj", "{3D67D26B-A3F0-4002-A8B2-DCD844B67F03}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmartwayTest.Domain", "src\SmartwayTest.Domain\SmartwayTest.Domain.csproj", "{5F34122A-0EA2-49C5-B70B-BC2DCEE6B726}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{42633E42-0F97-490A-ACD2-4E8B5E700D2A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmartwayTest.DataAccess", "src\SmartwayTest.DataAccess\SmartwayTest.DataAccess.csproj", "{A9E2C1CB-FEB5-48EF-B5E7-5DD62100408D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{09552969-DAA0-4BFE-982B-24904D07A28B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmartwayTest.Api", "src\SmartwayTest.Api\SmartwayTest.Api.csproj", "{F87C9EAB-2D59-4008-932D-17CB204017AF}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ABA7C0D1-E8D0-4211-8F89-16D50ED5B5FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ABA7C0D1-E8D0-4211-8F89-16D50ED5B5FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ABA7C0D1-E8D0-4211-8F89-16D50ED5B5FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ABA7C0D1-E8D0-4211-8F89-16D50ED5B5FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D67D26B-A3F0-4002-A8B2-DCD844B67F03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D67D26B-A3F0-4002-A8B2-DCD844B67F03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D67D26B-A3F0-4002-A8B2-DCD844B67F03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D67D26B-A3F0-4002-A8B2-DCD844B67F03}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F34122A-0EA2-49C5-B70B-BC2DCEE6B726}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F34122A-0EA2-49C5-B70B-BC2DCEE6B726}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F34122A-0EA2-49C5-B70B-BC2DCEE6B726}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F34122A-0EA2-49C5-B70B-BC2DCEE6B726}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A9E2C1CB-FEB5-48EF-B5E7-5DD62100408D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9E2C1CB-FEB5-48EF-B5E7-5DD62100408D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9E2C1CB-FEB5-48EF-B5E7-5DD62100408D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9E2C1CB-FEB5-48EF-B5E7-5DD62100408D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F87C9EAB-2D59-4008-932D-17CB204017AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F87C9EAB-2D59-4008-932D-17CB204017AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F87C9EAB-2D59-4008-932D-17CB204017AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F87C9EAB-2D59-4008-932D-17CB204017AF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{ABA7C0D1-E8D0-4211-8F89-16D50ED5B5FE} = {19FEEF71-A972-473C-8242-7BC67CB82EED}
+		{3D67D26B-A3F0-4002-A8B2-DCD844B67F03} = {19FEEF71-A972-473C-8242-7BC67CB82EED}
+		{5F34122A-0EA2-49C5-B70B-BC2DCEE6B726} = {19FEEF71-A972-473C-8242-7BC67CB82EED}
+		{A9E2C1CB-FEB5-48EF-B5E7-5DD62100408D} = {42633E42-0F97-490A-ACD2-4E8B5E700D2A}
+		{F87C9EAB-2D59-4008-932D-17CB204017AF} = {09552969-DAA0-4BFE-982B-24904D07A28B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {86EA6134-A904-4A53-8349-FB2673870189}
