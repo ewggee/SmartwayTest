@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SmartwayTest.Application.Services;
 using SmartwayTest.Contracts.Requests;
+using SmartwayTest.Contracts.Services;
 
 namespace SmartwayTest.Api.Controllers;
 
@@ -31,10 +31,10 @@ public class EmployeeController : ControllerBase
         return Ok();
     }
 
-    [HttpPatch]
-    public async Task<IActionResult> UpdateEmployee([FromBody] UpdateEmployeeRequest updateEmployeeRequest)
+    [HttpPatch("{employeeId}")]
+    public async Task<IActionResult> UpdateEmployee([FromRoute] int employeeId, [FromBody] UpdateEmployeeRequest request)
     {
-        await _employeeService.UpdateEmployeeAsync(updateEmployeeRequest);
+        await _employeeService.UpdateEmployeeAsync(employeeId, request);
 
         return NoContent();
     }

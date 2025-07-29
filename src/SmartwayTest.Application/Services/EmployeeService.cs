@@ -1,10 +1,10 @@
 ﻿using SmartwayTest.Application.Mappers;
 using SmartwayTest.Contracts.DTOs;
 using SmartwayTest.Contracts.Requests;
-using SmartwayTest.DataAccess.Repositories;
-using SmartwayTest.Domain.Entities;
+using SmartwayTest.Contracts.Services;
 using SmartwayTest.Domain.Exceptions.Company;
 using SmartwayTest.Domain.Exceptions.Department;
+using SmartwayTest.Domain.Exceptions.Employee;
 using SmartwayTest.Domain.Exceptions.Passport;
 using SmartwayTest.Domain.Repositories;
 
@@ -31,17 +31,29 @@ public class EmployeeService : IEmployeeService
 
     public async Task<int> AddEmployeeAsync(CreateEmployeeRequest request)
     {
-        var isPassportExists = await _passportRepository.IsPassportByIdExistsAsync(request.PassportId);
-        if (!isPassportExists) throw new PassportNotFoundException(request.PassportId);
+        _employeeRepository.BeginTransaction();
+        try
+        {
+            var isPassportExists = await _passportRepository.IsPassportByIdExistsAsync(request.PassportId);
+            if (!isPassportExists) throw new PassportNotFoundException(request.PassportId);
 
-        var isCompanyExists = await _companyRepository.IsCompanyByIdExistsAsync(request.CompanyId);
-        if (!isCompanyExists) throw new CompanyNotFoundException(request.CompanyId);
+            var isCompanyExists = await _companyRepository.IsCompanyByIdExistsAsync(request.CompanyId);
+            if (!isCompanyExists) throw new CompanyNotFoundException(request.CompanyId);
 
-        var isDepartmentExists = await _departmentRepository.IsDepartmentByIdExistsAsync(request.DepartmentId);
-        if (!isDepartmentExists) throw new DepartmentNotFoundException(request.DepartmentId);
+            var isDepartmentExists = await _departmentRepository.IsDepartmentByIdExistsAsync(request.DepartmentId);
+            if (!isDepartmentExists) throw new DepartmentNotFoundException(request.DepartmentId);
 
-        var employeeId = await _employeeRepository.AddEmployeeAsync(request.MapToEntity());
-        return employeeId;
+            var employeeId = await _employeeRepository.AddEmployeeAsync(request.MapToEntity());
+
+            _employeeRepository.Commit();
+
+            return employeeId;
+        }
+        catch
+        {
+            _employeeRepository.Rollback();
+            throw;
+        }
     }
 
     public async Task DeleteEmployeeAsync(int employeeId)
@@ -70,8 +82,22 @@ public class EmployeeService : IEmployeeService
         return employees.Select(e => e.MapToDto());
     }
 
-    public async Task UpdateEmployeeAsync(UpdateEmployeeRequest updateEmployeeRequest)
+    public async Task UpdateEmployeeAsync(int employeeId, UpdateEmployeeRequest request)
     {
-        await _employeeRepository.UpdateEmployeeAsync(updateEmployeeRequest.MapToEntity());
+        var existingEmployee = await _employeeRepository.GetEmployeeByIdAsync(employeeId)
+            ?? throw new EmployeeNotFoundException(employeeId);
+        
+        var isPassportExists = await _passportRepository.IsPassportByIdExistsAsync(request.PassportId);
+        if (!isPassportExists) throw new PassportNotFoundException(request.PassportId);
+
+        var isCompanyExists = await _companyRepository.IsCompanyByIdExistsAsync(request.CompanyId);
+        if (!isCompanyExists) throw new CompanyNotFoundException(request.CompanyId);
+
+        var isDepartmentExists = await _departmentRepository.IsDepartmentByIdExistsAsync(request.DepartmentId);
+        if (!isDepartmentExists) throw new DepartmentNotFoundException(request.DepartmentId);
+
+        var employee = request.MapToEntity();
+        employee.Id = employeeId;
+        await _employeeRepository.UpdateEmployeeAsync(employee);
     }
 }

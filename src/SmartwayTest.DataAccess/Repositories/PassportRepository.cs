@@ -1,5 +1,6 @@
 ﻿using SmartwayTest.Contracts.Dapper;
 using SmartwayTest.DataAccess.Scripts;
+using SmartwayTest.Domain.Repositories;
 
 namespace SmartwayTest.DataAccess.Repositories;
 

@@ -84,15 +84,39 @@ namespace SmartwayTest.DataAccess.Scripts {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to SELECT 
+        ///   Looks up a localized string similar to SELECT
+        ///    e.id,
+        ///    e.name, 
+        ///    e.surname, 
+        ///    e.phone, 
+        ///    e.company_id as CompanyId,
+        ///    p.type as PassportType,
+        ///    p.number as PassportNumber,
+        ///    d.name as DepartmentName,
+        ///    d.phone as DepartmentPhone
+        ///FROM employees e
+        ///    LEFT JOIN passports p ON e.passport_id = p.id
+        ///    LEFT JOIN departments d ON e.department_id = d.id
+        ///WHERE e.id = @id 
+        ///LIMIT 1.
+        /// </summary>
+        internal static string GetEmployeeById {
+            get {
+                return ResourceManager.GetString("GetEmployeeById", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SELECT
+        ///	e.id,
         ///	e.name, 
         ///	e.surname, 
         ///	e.phone, 
-        ///	e.company_id,
-        ///	p.type, 
-        ///	p.number, 
-        ///	d.name,
-        ///	d.phone
+        ///	e.company_id as CompanyId,
+        ///	p.type as PassportType,
+        ///	p.number as PassportNumber,
+        ///	d.name as DepartmentName,
+        ///	d.phone as DepartmentPhone
         ///FROM employees e
         ///	LEFT JOIN passports p ON e.passport_id = p.id
         ///	LEFT JOIN departments d ON e.department_id = d.id
@@ -105,15 +129,16 @@ namespace SmartwayTest.DataAccess.Scripts {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to SELECT 
+        ///   Looks up a localized string similar to SELECT
+        ///	e.id,
         ///	e.name, 
         ///	e.surname, 
         ///	e.phone, 
-        ///	e.company_id,
-        ///	p.type, 
-        ///	p.number, 
-        ///	d.name,
-        ///	d.phone
+        ///	e.company_id as CompanyId,
+        ///	p.type as PassportType,
+        ///	p.number as PassportNumber,
+        ///	d.name as DepartmentName,
+        ///	d.phone as DepartmentPhone
         ///FROM employees e
         ///	LEFT JOIN passports p ON e.passport_id = p.id
         ///	LEFT JOIN departments d ON e.department_id = d.id
@@ -166,8 +191,8 @@ namespace SmartwayTest.DataAccess.Scripts {
         ///    name = COALESCE(@name, name),
         ///    surname = COALESCE(@surname, surname),
         ///    phone = COALESCE(@phone, phone),
-        ///    company_id = COALESCE(@companyId, company_id),
-        ///    department_id = COALESCE(@departmentId, department_id)
+        ///    company_id = COALESCE(@company_Id, company_id),
+        ///    department_id = COALESCE(@department_Id, department_id)
         ///WHERE id = @id.
         /// </summary>
         internal static string UpdateEmployee {

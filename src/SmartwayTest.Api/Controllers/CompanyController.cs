@@ -1,6 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using SmartwayTest.Application.Services;
+﻿using Microsoft.AspNetCore.Mvc;
+using SmartwayTest.Contracts.Services;
 
 namespace SmartwayTest.Api.Controllers;
 

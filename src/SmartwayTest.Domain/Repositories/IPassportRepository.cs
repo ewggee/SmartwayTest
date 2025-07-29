@@ -1,4 +1,4 @@
-﻿namespace SmartwayTest.DataAccess.Repositories;
+﻿namespace SmartwayTest.Domain.Repositories;
 
 public interface IPassportRepository
 {

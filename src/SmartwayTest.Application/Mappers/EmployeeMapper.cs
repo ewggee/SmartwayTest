@@ -1,6 +1,7 @@
 ﻿using SmartwayTest.Contracts.DTOs;
 using SmartwayTest.Contracts.Requests;
 using SmartwayTest.Domain.Entities;
+using SmartwayTest.Domain.QueryModels;
 
 namespace SmartwayTest.Application.Mappers;
 
@@ -32,17 +33,25 @@ public static class EmployeeMapper
         };
     }
 
-    public static EmployeeDto MapToDto(this Employee e)
+    public static EmployeeDto MapToDto(this EmployeeFullInfo source)
     {
         return new EmployeeDto
         {
-            Id = e.Id,
-            Name = e.Name,
-            Surname = e.Surname,
-            Phone = e.Phone,
-            CompanyId = e.CompanyId,
-            PassportId = e.PassportId,
-            DepartmentId = e.DepartmentId
+            Id = source.Id,
+            Name = source.Name,
+            Surname = source.Surname,
+            Phone = source.Phone,
+            CompanyId = source.CompanyId,
+            Passport = new PassportDto
+            {
+                Type = source.PassportType,
+                Number = source.PassportNumber
+            },
+            Department = new DepartmentDto
+            {
+                Name = source.DepartmentName,
+                Phone = source.DepartmentPhone
+            }
         };
     }
 }

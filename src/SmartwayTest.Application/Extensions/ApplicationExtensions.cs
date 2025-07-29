@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using SmartwayTest.Application.Services;
+using SmartwayTest.Contracts.Services;
 
 namespace SmartwayTest.Application.Extensions;
 
