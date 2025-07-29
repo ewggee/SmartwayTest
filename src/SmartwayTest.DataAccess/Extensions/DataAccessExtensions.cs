@@ -37,7 +37,6 @@ public static class DataAccessExtensions
     public static IServiceCollection AddFluentMigrator(this IServiceCollection services, IConfiguration configuration)
     {
         services
-            .AddLogging(x => x.AddFluentMigratorConsole())
             .AddFluentMigratorCore()
             .ConfigureRunner(builder => builder
                 .AddPostgres()
