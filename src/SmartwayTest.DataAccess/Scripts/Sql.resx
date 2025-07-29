@@ -121,6 +121,9 @@
   <data name="CreateEmployee" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Employee\CreateEmployee.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1251</value>
   </data>
+  <data name="CreatePassport" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Passport\CreatePassport.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1251</value>
+  </data>
   <data name="DeleteEmployee" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Employee\DeleteEmployee.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1251</value>
   </data>
@@ -133,16 +136,22 @@
   <data name="GetEmployeesByDepartmentId" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Employee\GetEmployeesByDepartmentId.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1251</value>
   </data>
+  <data name="GetPassportById" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Passport\GetPassportById.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1251</value>
+  </data>
   <data name="IsCompanyByIdExists" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Company\IsCompanyByIdExists.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1251</value>
   </data>
   <data name="IsDeparmentByIdExists" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Department\IsDeparmentByIdExists.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1251</value>
   </data>
-  <data name="IsPassportByIdExists" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Passport\IsPassportByIdExists.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1251</value>
+  <data name="IsPassportExists" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Passport\IsPassportExists.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1251</value>
   </data>
   <data name="UpdateEmployee" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Employee\UpdateEmployee.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1251</value>
+  </data>
+  <data name="UpdatePassport" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Passport\UpdatePassport.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1251</value>
   </data>
 </root>

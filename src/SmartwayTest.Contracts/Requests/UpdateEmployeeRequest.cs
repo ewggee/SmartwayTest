@@ -1,4 +1,6 @@
-﻿namespace SmartwayTest.Contracts.Requests;
+﻿using SmartwayTest.Contracts.DTOs;
+
+namespace SmartwayTest.Contracts.Requests;
 
 public class UpdateEmployeeRequest
 {
@@ -10,7 +12,7 @@ public class UpdateEmployeeRequest
 
     public int CompanyId { get; set; }
 
-    public int PassportId { get; set; }
+    public PassportDto Passport { get; set; }
 
     public int DepartmentId { get; set; }
 }

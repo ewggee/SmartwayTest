@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-using SmartwayTest.Domain.Exceptions;
+using SmartwayTest.Domain.Exceptions.Common;
+using SmartwayTest.Domain.Exceptions.Passport;
 
 namespace SmartwayTest.Api.Filters;
 
@@ -20,6 +21,7 @@ public class ApiExceptionFilter : IExceptionFilter
         var statusCode = context.HttpContext.Response.StatusCode = ex switch
         {
             EntityNotFoundException => StatusCodes.Status404NotFound,
+            PassportAlreadyExistsException => StatusCodes.Status400BadRequest,
             _ => StatusCodes.Status500InternalServerError
         };
 

@@ -2,6 +2,7 @@
 using SmartwayTest.Contracts.DTOs;
 using SmartwayTest.Contracts.Requests;
 using SmartwayTest.Contracts.Services;
+using SmartwayTest.Domain.Entities;
 using SmartwayTest.Domain.Exceptions.Company;
 using SmartwayTest.Domain.Exceptions.Department;
 using SmartwayTest.Domain.Exceptions.Employee;
@@ -34,8 +35,8 @@ public class EmployeeService : IEmployeeService
         _employeeRepository.BeginTransaction();
         try
         {
-            var isPassportExists = await _passportRepository.IsPassportByIdExistsAsync(request.PassportId);
-            if (!isPassportExists) throw new PassportNotFoundException(request.PassportId);
+            var isPassportExists = await _passportRepository.IsPassportExistsAsync(request.Passport.MapToEntity());
+            if (isPassportExists) throw new PassportAlreadyExistsException(request.Passport.Number);
 
             var isCompanyExists = await _companyRepository.IsCompanyByIdExistsAsync(request.CompanyId);
             if (!isCompanyExists) throw new CompanyNotFoundException(request.CompanyId);
@@ -43,7 +44,16 @@ public class EmployeeService : IEmployeeService
             var isDepartmentExists = await _departmentRepository.IsDepartmentByIdExistsAsync(request.DepartmentId);
             if (!isDepartmentExists) throw new DepartmentNotFoundException(request.DepartmentId);
 
-            var employeeId = await _employeeRepository.AddEmployeeAsync(request.MapToEntity());
+            var passport = new Passport
+            {
+                Type = request.Passport.Type,
+                Number = request.Passport.Number
+            };
+            var passportId = await _passportRepository.AddPassportAsync(passport);
+
+            var employee = request.MapToEntity();
+            employee.PassportId = passportId;
+            var employeeId = await _employeeRepository.AddEmployeeAsync(employee);
 
             _employeeRepository.Commit();
 
@@ -84,20 +94,33 @@ public class EmployeeService : IEmployeeService
 
     public async Task UpdateEmployeeAsync(int employeeId, UpdateEmployeeRequest request)
     {
-        var existingEmployee = await _employeeRepository.GetEmployeeByIdAsync(employeeId)
+        _employeeRepository.BeginTransaction();
+        try
+        {
+            var existingEmployee = await _employeeRepository.GetEmployeeByIdAsync(employeeId)
             ?? throw new EmployeeNotFoundException(employeeId);
-        
-        var isPassportExists = await _passportRepository.IsPassportByIdExistsAsync(request.PassportId);
-        if (!isPassportExists) throw new PassportNotFoundException(request.PassportId);
 
-        var isCompanyExists = await _companyRepository.IsCompanyByIdExistsAsync(request.CompanyId);
-        if (!isCompanyExists) throw new CompanyNotFoundException(request.CompanyId);
+            var isPassportExists = await _passportRepository.IsPassportExistsAsync(request.Passport.MapToEntity());
+            if (!isPassportExists) throw new PassportNotFoundException();
 
-        var isDepartmentExists = await _departmentRepository.IsDepartmentByIdExistsAsync(request.DepartmentId);
-        if (!isDepartmentExists) throw new DepartmentNotFoundException(request.DepartmentId);
+            var isCompanyExists = await _companyRepository.IsCompanyByIdExistsAsync(request.CompanyId);
+            if (!isCompanyExists) throw new CompanyNotFoundException(request.CompanyId);
 
-        var employee = request.MapToEntity();
-        employee.Id = employeeId;
-        await _employeeRepository.UpdateEmployeeAsync(employee);
+            var isDepartmentExists = await _departmentRepository.IsDepartmentByIdExistsAsync(request.DepartmentId);
+            if (!isDepartmentExists) throw new DepartmentNotFoundException(request.DepartmentId);
+
+            await _passportRepository.UpdatePassportAsync(request.Passport.MapToEntity());
+
+            var employee = request.MapToEntity();
+            employee.Id = employeeId;
+            await _employeeRepository.UpdateEmployeeAsync(employee);
+
+            _employeeRepository.Commit();
+        }
+        catch
+        {
+            _employeeRepository.Rollback();
+            throw;
+        }
     }
 }

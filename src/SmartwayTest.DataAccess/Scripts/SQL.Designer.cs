@@ -74,6 +74,16 @@ namespace SmartwayTest.DataAccess.Scripts {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to INSERT INTO passports (type, number)
+        ///VALUES (@type, @number).
+        /// </summary>
+        internal static string CreatePassport {
+            get {
+                return ResourceManager.GetString("CreatePassport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to DELETE FROM employees 
         ///WHERE id = @id.
         /// </summary>
@@ -151,6 +161,18 @@ namespace SmartwayTest.DataAccess.Scripts {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to SELECT 
+        ///	id, type, number
+        ///FROM passports
+        ///WHERE id = @id.
+        /// </summary>
+        internal static string GetPassportById {
+            get {
+                return ResourceManager.GetString("GetPassportById", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to SELECT EXISTS(
         ///    SELECT id 
         ///    FROM companies
@@ -178,11 +200,11 @@ namespace SmartwayTest.DataAccess.Scripts {
         ///   Looks up a localized string similar to SELECT EXISTS(
         ///    SELECT id 
         ///    FROM passports
-        ///    WHERE id = @id).
+        ///    WHERE type = @type AND number = @number).
         /// </summary>
-        internal static string IsPassportByIdExists {
+        internal static string IsPassportExists {
             get {
-                return ResourceManager.GetString("IsPassportByIdExists", resourceCulture);
+                return ResourceManager.GetString("IsPassportExists", resourceCulture);
             }
         }
         
@@ -198,6 +220,18 @@ namespace SmartwayTest.DataAccess.Scripts {
         internal static string UpdateEmployee {
             get {
                 return ResourceManager.GetString("UpdateEmployee", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to UPDATE passports SET
+        ///	type = COALESCE(@type, type),
+        ///	number = COALESCE(@number, number)
+        ///WHERE id = @id.
+        /// </summary>
+        internal static string UpdatePassport {
+            get {
+                return ResourceManager.GetString("UpdatePassport", resourceCulture);
             }
         }
     }
