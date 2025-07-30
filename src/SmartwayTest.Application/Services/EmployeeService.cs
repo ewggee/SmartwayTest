@@ -46,7 +46,7 @@ public class EmployeeService : IEmployeeService
         var isDepartmentExists = await _departmentRepository.IsDepartmentByIdExistsAsync(departmentId);
         if (!isDepartmentExists) throw new DepartmentNotFoundException(departmentId);
 
-        var employees = await _employeeRepository.GetEmployeesByDepartmentIdAsync(departmentId);
+        var employees = await _employeeRepository.GetEmployeesByDepartmentIdAsync(companyId, departmentId);
         return employees.Select(e => e.MapToDto());
     }
 

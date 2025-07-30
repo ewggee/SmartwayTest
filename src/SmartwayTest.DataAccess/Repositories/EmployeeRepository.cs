@@ -39,11 +39,11 @@ public class EmployeeRepository : IEmployeeRepository
         return employees;
     }
 
-    public async Task<IEnumerable<EmployeeFullInfo>> GetEmployeesByDepartmentIdAsync(int departmentId)
+    public async Task<IEnumerable<EmployeeFullInfo>> GetEmployeesByDepartmentIdAsync(int companyId, int departmentId)
     {
         var employees = await _context.ListOrEmpty<EmployeeFullInfo>(new QueryObject(
             Sql.GetEmployeesByDepartmentId,
-            new { department_id = departmentId }));
+            new { company_id = companyId, department_id = departmentId }));
 
         return employees;
     }
