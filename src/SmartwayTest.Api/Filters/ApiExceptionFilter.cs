@@ -21,7 +21,7 @@ public class ApiExceptionFilter : IExceptionFilter
         var statusCode = context.HttpContext.Response.StatusCode = ex switch
         {
             EntityNotFoundException => StatusCodes.Status404NotFound,
-            PassportAlreadyExistsException => StatusCodes.Status400BadRequest,
+            EntityAlreadyExistsException => StatusCodes.Status409Conflict,
             _ => StatusCodes.Status500InternalServerError
         };
 
@@ -33,7 +33,7 @@ public class ApiExceptionFilter : IExceptionFilter
 
         context.Result = new JsonResult(errorResponse) { StatusCode = statusCode };
 
-        _logger.LogError("Exception occured: {0}", ex.Message);
+        _logger.LogError("Exception occured: {0}\n\tEndpoint: {1}", ex.Message, context.HttpContext.Request.Path);
 
         context.ExceptionHandled = true;
     }

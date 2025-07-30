@@ -2,7 +2,6 @@
 using SmartwayTest.Contracts.DTOs;
 using SmartwayTest.Contracts.Requests;
 using SmartwayTest.Contracts.Services;
-using SmartwayTest.Domain.Entities;
 using SmartwayTest.Domain.Exceptions.Company;
 using SmartwayTest.Domain.Exceptions.Department;
 using SmartwayTest.Domain.Exceptions.Employee;
@@ -44,15 +43,11 @@ public class EmployeeService : IEmployeeService
             var isDepartmentExists = await _departmentRepository.IsDepartmentByIdExistsAsync(request.DepartmentId);
             if (!isDepartmentExists) throw new DepartmentNotFoundException(request.DepartmentId);
 
-            var passport = new Passport
-            {
-                Type = request.Passport.Type,
-                Number = request.Passport.Number
-            };
+            var passport = request.Passport.MapToEntity();
             var passportId = await _passportRepository.AddPassportAsync(passport);
 
             var employee = request.MapToEntity();
-            employee.PassportId = passportId;
+            employee.Passport.Id = passportId;
             var employeeId = await _employeeRepository.AddEmployeeAsync(employee);
 
             _employeeRepository.Commit();
@@ -98,10 +93,7 @@ public class EmployeeService : IEmployeeService
         try
         {
             var existingEmployee = await _employeeRepository.GetEmployeeByIdAsync(employeeId)
-            ?? throw new EmployeeNotFoundException(employeeId);
-
-            var isPassportExists = await _passportRepository.IsPassportExistsAsync(request.Passport.MapToEntity());
-            if (!isPassportExists) throw new PassportNotFoundException();
+                ?? throw new EmployeeNotFoundException(employeeId);
 
             var isCompanyExists = await _companyRepository.IsCompanyByIdExistsAsync(request.CompanyId);
             if (!isCompanyExists) throw new CompanyNotFoundException(request.CompanyId);
@@ -109,7 +101,9 @@ public class EmployeeService : IEmployeeService
             var isDepartmentExists = await _departmentRepository.IsDepartmentByIdExistsAsync(request.DepartmentId);
             if (!isDepartmentExists) throw new DepartmentNotFoundException(request.DepartmentId);
 
-            await _passportRepository.UpdatePassportAsync(request.Passport.MapToEntity());
+            var passport = request.Passport.MapToEntity();
+            passport.Id = existingEmployee.PassportId;
+            await _passportRepository.UpdatePassportAsync(passport);
 
             var employee = request.MapToEntity();
             employee.Id = employeeId;

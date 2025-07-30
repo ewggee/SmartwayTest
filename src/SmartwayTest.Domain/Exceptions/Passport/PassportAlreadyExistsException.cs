@@ -1,3 +1,5 @@
-﻿namespace SmartwayTest.Domain.Exceptions.Passport;
+﻿using SmartwayTest.Domain.Exceptions.Common;
 
-public class PassportAlreadyExistsException(string number) : Exception($"Passport with number {number} already exists.");
+namespace SmartwayTest.Domain.Exceptions.Passport;
+
+public class PassportAlreadyExistsException() : EntityAlreadyExistsException(nameof(Entities.Passport));

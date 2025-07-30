@@ -16,7 +16,11 @@ public static class EmployeeMapper
             Phone = r.Phone,
             CompanyId = r.CompanyId,
             DepartmentId = r.DepartmentId,
-            PassportId = r.PassportId,
+            Passport = new Passport
+            {
+                Type = r.Passport.Type,
+                Number = r.Passport.Number
+            }
         };
     }
 
@@ -29,7 +33,6 @@ public static class EmployeeMapper
             Phone = r.Phone,
             CompanyId = r.CompanyId,
             DepartmentId = r.DepartmentId,
-            PassportId = r.PassportId,
         };
     }
 

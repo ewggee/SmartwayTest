@@ -34,7 +34,7 @@ public class PassportRepository : IPassportRepository
 
     public async Task UpdatePassportAsync(Passport passport)
     {
-        await _context.ExecuteWithResult<int>(new QueryObject(
+        await _context.Execute(new QueryObject(
             Sql.UpdatePassport,
             new { type = passport.Type, number = passport.Number, id = passport.Id }));
     }

@@ -12,6 +12,8 @@ public class EmployeeFullInfo
 
     public int CompanyId { get; set; }
 
+    public int PassportId { get; set; }
+
     public string PassportType { get; set; }
 
     public string PassportNumber { get; set; }

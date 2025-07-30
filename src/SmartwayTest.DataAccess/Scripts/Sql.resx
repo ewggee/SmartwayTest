@@ -136,9 +136,6 @@
   <data name="GetEmployeesByDepartmentId" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Employee\GetEmployeesByDepartmentId.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1251</value>
   </data>
-  <data name="GetPassportById" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Passport\GetPassportById.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1251</value>
-  </data>
   <data name="IsCompanyByIdExists" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Company\IsCompanyByIdExists.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1251</value>
   </data>

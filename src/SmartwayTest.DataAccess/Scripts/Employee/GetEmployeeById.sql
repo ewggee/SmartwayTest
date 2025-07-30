@@ -4,6 +4,7 @@ SELECT
     e.surname, 
     e.phone, 
     e.company_id as CompanyId,
+    p.id as PassportId,
     p.type as PassportType,
     p.number as PassportNumber,
     d.name as DepartmentName,

@@ -75,7 +75,8 @@ namespace SmartwayTest.DataAccess.Scripts {
         
         /// <summary>
         ///   Looks up a localized string similar to INSERT INTO passports (type, number)
-        ///VALUES (@type, @number).
+        ///VALUES (@type, @number)
+        ///RETURNING id.
         /// </summary>
         internal static string CreatePassport {
             get {
@@ -100,6 +101,7 @@ namespace SmartwayTest.DataAccess.Scripts {
         ///    e.surname, 
         ///    e.phone, 
         ///    e.company_id as CompanyId,
+        ///    p.id as PassportId,
         ///    p.type as PassportType,
         ///    p.number as PassportNumber,
         ///    d.name as DepartmentName,
@@ -157,18 +159,6 @@ namespace SmartwayTest.DataAccess.Scripts {
         internal static string GetEmployeesByDepartmentId {
             get {
                 return ResourceManager.GetString("GetEmployeesByDepartmentId", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to SELECT 
-        ///	id, type, number
-        ///FROM passports
-        ///WHERE id = @id.
-        /// </summary>
-        internal static string GetPassportById {
-            get {
-                return ResourceManager.GetString("GetPassportById", resourceCulture);
             }
         }
         

@@ -12,7 +12,7 @@ public class Employee : IEntity
 
     public int CompanyId { get; set; }
 
-    public int PassportId { get; set; }
+    public Passport Passport { get; set; }
 
     public int DepartmentId { get; set; }
 }

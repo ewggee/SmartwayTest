@@ -57,7 +57,7 @@ public class EmployeeRepository : IEmployeeRepository
                 surname = employee.Surname,
                 phone = employee.Phone,
                 company_id = employee.CompanyId,
-                passport_id = employee.PassportId,
+                passport_id = employee.Passport.Id,
                 department_id = employee.DepartmentId
             }));
 
