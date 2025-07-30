@@ -35,7 +35,7 @@ public class EmployeeService : IEmployeeService
         try
         {
             var isPassportExists = await _passportRepository.IsPassportExistsAsync(request.Passport.MapToEntity());
-            if (isPassportExists) throw new PassportAlreadyExistsException(request.Passport.Number);
+            if (isPassportExists) throw new PassportAlreadyExistsException();
 
             var isCompanyExists = await _companyRepository.IsCompanyByIdExistsAsync(request.CompanyId);
             if (!isCompanyExists) throw new CompanyNotFoundException(request.CompanyId);
