@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using SmartwayTest.Domain.Exceptions.Common;
-using SmartwayTest.Domain.Exceptions.Passport;
 
 namespace SmartwayTest.Api.Filters;
 

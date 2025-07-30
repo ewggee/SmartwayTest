@@ -29,6 +29,27 @@ public class EmployeeService : IEmployeeService
         _departmentRepository = departmentRepository;
     }
 
+    public async Task<IEnumerable<EmployeeDto>> GetEmployeesByCompanyIdAsync(int companyId)
+    {
+        var isCompanyExists = await _companyRepository.IsCompanyByIdExistsAsync(companyId);
+        if (!isCompanyExists) throw new CompanyNotFoundException(companyId);
+
+        var employees = await _employeeRepository.GetEmployeesByCompanyIdAsync(companyId);
+        return employees.Select(e => e.MapToDto());
+    }
+
+    public async Task<IEnumerable<EmployeeDto>> GetEmployeesByDepartmentIdAsync(int companyId, int departmentId)
+    {
+        var isCompanyExists = await _companyRepository.IsCompanyByIdExistsAsync(companyId);
+        if (!isCompanyExists) throw new CompanyNotFoundException(companyId);
+
+        var isDepartmentExists = await _departmentRepository.IsDepartmentByIdExistsAsync(departmentId);
+        if (!isDepartmentExists) throw new DepartmentNotFoundException(departmentId);
+
+        var employees = await _employeeRepository.GetEmployeesByDepartmentIdAsync(departmentId);
+        return employees.Select(e => e.MapToDto());
+    }
+
     public async Task<int> AddEmployeeAsync(CreateEmployeeRequest request)
     {
         _employeeRepository.BeginTransaction();
@@ -61,32 +82,6 @@ public class EmployeeService : IEmployeeService
         }
     }
 
-    public async Task DeleteEmployeeAsync(int employeeId)
-    {
-        await _employeeRepository.DeleteEmployeeAsync(employeeId);
-    }
-
-    public async Task<IEnumerable<EmployeeDto>> GetEmployeesByCompanyIdAsync(int companyId)
-    {
-        var isCompanyExists = await _companyRepository.IsCompanyByIdExistsAsync(companyId);
-        if (!isCompanyExists) throw new CompanyNotFoundException(companyId);
-
-        var employees = await _employeeRepository.GetEmployeesByCompanyIdAsync(companyId);
-        return employees.Select(e => e.MapToDto());
-    }
-
-    public async Task<IEnumerable<EmployeeDto>> GetEmployeesByDepartmentIdAsync(int companyId, int departmentId)
-    {
-        var isCompanyExists = await _companyRepository.IsCompanyByIdExistsAsync(companyId);
-        if (!isCompanyExists) throw new CompanyNotFoundException(companyId);
-
-        var isDepartmentExists = await _departmentRepository.IsDepartmentByIdExistsAsync(departmentId);
-        if (!isDepartmentExists) throw new DepartmentNotFoundException(departmentId);
-
-        var employees = await _employeeRepository.GetEmployeesByDepartmentIdAsync(departmentId);
-        return employees.Select(e => e.MapToDto());
-    }
-
     public async Task UpdateEmployeeAsync(int employeeId, UpdateEmployeeRequest request)
     {
         _employeeRepository.BeginTransaction();
@@ -116,5 +111,10 @@ public class EmployeeService : IEmployeeService
             _employeeRepository.Rollback();
             throw;
         }
+    }
+
+    public async Task DeleteEmployeeAsync(int employeeId)
+    {
+        await _employeeRepository.DeleteEmployeeAsync(employeeId);
     }
 }

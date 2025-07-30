@@ -18,7 +18,8 @@ public static class DataAccessExtensions
 
         services.Configure<DapperSettings>(o =>
         {
-            o.ConnectionString = configuration.GetConnectionString("DefaultConnection")!;
+            o.ConnectionString = configuration.GetConnectionString("DefaultConnection")
+                ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
         });
 
         return services;
@@ -40,7 +41,8 @@ public static class DataAccessExtensions
             .AddFluentMigratorCore()
             .ConfigureRunner(builder => builder
                 .AddPostgres()
-                .WithGlobalConnectionString(configuration.GetConnectionString("DefaultConnection")!)
+                .WithGlobalConnectionString(configuration.GetConnectionString("DefaultConnection")
+                    ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found."))
                 .ScanIn(typeof(M001_Initial).Assembly).For.Migrations())
             .AddLogging(lb => lb.AddFluentMigratorConsole())
             .BuildServiceProvider(false);
