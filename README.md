@@ -30,6 +30,6 @@ DB_NAME=SmartwayTest
 docker-compose up
 ```
 
-4. Перейти по адресу:
-- Swagger UI: http://localhost:5000/swagger
-- Основной URL: http://localhost:5000/api
+4. Перейти по ссылке:
+- Swagger UI: http://localhost:8080/swagger
+- Основной URL: http://localhost:8080/api
